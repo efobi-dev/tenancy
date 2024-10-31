@@ -4,10 +4,10 @@ import {
 	setSessionTokenCookie,
 } from "@/lib/auth";
 import { google } from "@/lib/auth";
+import type { CreateCustomer, GoogleUser } from "@/lib/types";
 import prisma from "@/lib/db";
-import { cookies } from "next/headers";
-import type { CreateCustomer, GoogleUser } from "@/lib/constants";
 import { env } from "@/lib/env";
+import { cookies } from "next/headers";
 
 export async function GET(request: Request): Promise<Response> {
 	const url = new URL(request.url);

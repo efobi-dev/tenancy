@@ -1,23 +1,31 @@
-import * as z from "zod"
-import { MaintenancePriority, MaintenanceStatus } from "@prisma/client"
-import { CompleteTenant, relatedTenantModel, CompleteLandlord, relatedLandlordModel, CompleteImage, relatedImageModel } from "./index"
+import { MaintenancePriority, MaintenanceStatus } from "@prisma/client";
+import * as z from "zod";
+import {
+	type CompleteImage,
+	type CompleteLandlord,
+	type CompleteTenant,
+	relatedImageModel,
+	relatedLandlordModel,
+	relatedTenantModel,
+} from "./index";
 
 export const maintenanceJobModel = z.object({
-  id: z.string(),
-  tenantId: z.string(),
-  landlordId: z.string(),
-  title: z.string(),
-  description: z.string(),
-  priority: z.nativeEnum(MaintenancePriority),
-  status: z.nativeEnum(MaintenanceStatus),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-})
+	id: z.string(),
+	tenantId: z.string(),
+	landlordId: z.string(),
+	title: z.string(),
+	description: z.string(),
+	priority: z.nativeEnum(MaintenancePriority),
+	status: z.nativeEnum(MaintenanceStatus),
+	createdAt: z.date(),
+	updatedAt: z.date(),
+});
 
-export interface CompleteMaintenanceJob extends z.infer<typeof maintenanceJobModel> {
-  tenant: CompleteTenant
-  landlord: CompleteLandlord
-  images: CompleteImage[]
+export interface CompleteMaintenanceJob
+	extends z.infer<typeof maintenanceJobModel> {
+	tenant: CompleteTenant;
+	landlord: CompleteLandlord;
+	images: CompleteImage[];
 }
 
 /**
@@ -25,8 +33,11 @@ export interface CompleteMaintenanceJob extends z.infer<typeof maintenanceJobMod
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const relatedMaintenanceJobModel: z.ZodSchema<CompleteMaintenanceJob> = z.lazy(() => maintenanceJobModel.extend({
-  tenant: relatedTenantModel,
-  landlord: relatedLandlordModel,
-  images: relatedImageModel.array(),
-}))
+export const relatedMaintenanceJobModel: z.ZodSchema<CompleteMaintenanceJob> =
+	z.lazy(() =>
+		maintenanceJobModel.extend({
+			tenant: relatedTenantModel,
+			landlord: relatedLandlordModel,
+			images: relatedImageModel.array(),
+		}),
+	);

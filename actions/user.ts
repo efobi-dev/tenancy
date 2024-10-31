@@ -1,10 +1,10 @@
 "use server";
 
-import prisma from "@/lib/db";
-import { getAuth } from "./auth";
 import { verifyUserSchema } from "@/lib/constants";
-import type { VerifyUser, ValidateCustomer } from "@/lib/types";
+import prisma from "@/lib/db";
 import { env } from "@/lib/env";
+import type { ValidateCustomer, VerifyUser } from "@/lib/types";
+import { getAuth } from "./auth";
 
 export async function getBank(query?: string) {
 	try {

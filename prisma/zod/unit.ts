@@ -1,24 +1,33 @@
-import * as z from "zod"
-import { UnitType, UnitStatus } from "@prisma/client"
-import { CompleteProperty, relatedPropertyModel, CompleteLease, relatedLeaseModel, CompleteDocument, relatedDocumentModel, CompleteImage, relatedImageModel } from "./index"
+import { UnitStatus, UnitType } from "@prisma/client";
+import * as z from "zod";
+import {
+	type CompleteDocument,
+	type CompleteImage,
+	type CompleteLease,
+	type CompleteProperty,
+	relatedDocumentModel,
+	relatedImageModel,
+	relatedLeaseModel,
+	relatedPropertyModel,
+} from "./index";
 
 export const unitModel = z.object({
-  id: z.string(),
-  unitNumber: z.string(),
-  propertyId: z.string(),
-  type: z.nativeEnum(UnitType),
-  rentAmount: z.number(),
-  status: z.nativeEnum(UnitStatus),
-  features: z.string().nullish(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-})
+	id: z.string(),
+	unitNumber: z.string(),
+	propertyId: z.string(),
+	type: z.nativeEnum(UnitType),
+	rentAmount: z.number(),
+	status: z.nativeEnum(UnitStatus),
+	features: z.string().nullish(),
+	createdAt: z.date(),
+	updatedAt: z.date(),
+});
 
 export interface CompleteUnit extends z.infer<typeof unitModel> {
-  property: CompleteProperty
-  leases: CompleteLease[]
-  documents: CompleteDocument[]
-  images: CompleteImage[]
+	property: CompleteProperty;
+	leases: CompleteLease[];
+	documents: CompleteDocument[];
+	images: CompleteImage[];
 }
 
 /**
@@ -26,9 +35,11 @@ export interface CompleteUnit extends z.infer<typeof unitModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const relatedUnitModel: z.ZodSchema<CompleteUnit> = z.lazy(() => unitModel.extend({
-  property: relatedPropertyModel,
-  leases: relatedLeaseModel.array(),
-  documents: relatedDocumentModel.array(),
-  images: relatedImageModel.array(),
-}))
+export const relatedUnitModel: z.ZodSchema<CompleteUnit> = z.lazy(() =>
+	unitModel.extend({
+		property: relatedPropertyModel,
+		leases: relatedLeaseModel.array(),
+		documents: relatedDocumentModel.array(),
+		images: relatedImageModel.array(),
+	}),
+);

@@ -1,6 +1,6 @@
 import prisma from "@/lib/db";
-import type { GetBanks } from "@/lib/constants";
 import { env } from "@/lib/env";
+import type { GetBanks } from "@/lib/types";
 
 export async function GET(): Promise<Response> {
 	try {

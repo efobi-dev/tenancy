@@ -1,6 +1,6 @@
 import { getAuth } from "@/actions/auth";
-import type { Metadata } from "next";
 import { Verification } from "@/components/verify-user";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {

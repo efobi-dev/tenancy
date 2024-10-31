@@ -1,10 +1,10 @@
 "use client";
 
-import { Input } from "./ui/input";
-import { Loader } from "lucide-react";
-import { useState } from "react";
 import { uploadAvatar } from "@/actions/user";
 import { useToast } from "@/hooks/use-toast";
+import { Loader } from "lucide-react";
+import { useState } from "react";
+import { Input } from "./ui/input";
 
 export function UploadProfile() {
 	const { toast } = useToast();

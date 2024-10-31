@@ -139,15 +139,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const { name, email, avatar } = data.user;
 	return (
 		<Sidebar collapsible="icon" {...props}>
-			<SidebarHeader>
-				<LogoHead />
-			</SidebarHeader>
+			<SidebarHeader>{/* <LogoHead role={undefined} /> */}</SidebarHeader>
 			<SidebarContent>
 				<NavMain items={data.navMain} />
 				<NavRoutes links={data.projects} />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser name={name} email={email} picture={avatar} />
+				<NavUser name={name} email={email} avatar={avatar} />
 			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>

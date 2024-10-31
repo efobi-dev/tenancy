@@ -1,21 +1,26 @@
-import * as z from "zod"
-import { DocumentType } from "@prisma/client"
-import { CompleteUnit, relatedUnitModel, CompleteLease, relatedLeaseModel } from "./index"
+import { DocumentType } from "@prisma/client";
+import * as z from "zod";
+import {
+	type CompleteLease,
+	type CompleteUnit,
+	relatedLeaseModel,
+	relatedUnitModel,
+} from "./index";
 
 export const documentModel = z.object({
-  id: z.string(),
-  name: z.string(),
-  type: z.nativeEnum(DocumentType),
-  url: z.string(),
-  unitId: z.string().nullish(),
-  leaseId: z.string().nullish(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-})
+	id: z.string(),
+	name: z.string(),
+	type: z.nativeEnum(DocumentType),
+	url: z.string(),
+	unitId: z.string().nullish(),
+	leaseId: z.string().nullish(),
+	createdAt: z.date(),
+	updatedAt: z.date(),
+});
 
 export interface CompleteDocument extends z.infer<typeof documentModel> {
-  unit?: CompleteUnit | null
-  lease?: CompleteLease | null
+	unit?: CompleteUnit | null;
+	lease?: CompleteLease | null;
 }
 
 /**
@@ -23,7 +28,9 @@ export interface CompleteDocument extends z.infer<typeof documentModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const relatedDocumentModel: z.ZodSchema<CompleteDocument> = z.lazy(() => documentModel.extend({
-  unit: relatedUnitModel.nullish(),
-  lease: relatedLeaseModel.nullish(),
-}))
+export const relatedDocumentModel: z.ZodSchema<CompleteDocument> = z.lazy(() =>
+	documentModel.extend({
+		unit: relatedUnitModel.nullish(),
+		lease: relatedLeaseModel.nullish(),
+	}),
+);

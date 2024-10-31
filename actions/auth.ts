@@ -10,12 +10,12 @@ import {
 	validateSessionToken,
 } from "@/lib/auth";
 import { signInSchema, signUpSchema } from "@/lib/constants";
-import type { CreateCustomer, SignIn, SignUp } from "@/lib/types";
 import prisma from "@/lib/db";
+import { env } from "@/lib/env";
+import type { CreateCustomer, SignIn, SignUp } from "@/lib/types";
 import { cookies } from "next/headers";
 import { Argon2id } from "oslo/password";
 import { cache } from "react";
-import { env } from "@/lib/env";
 export async function signUp(values: SignUp) {
 	try {
 		const { data, error } = await signUpSchema.safeParseAsync(values);

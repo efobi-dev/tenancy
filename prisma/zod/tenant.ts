@@ -1,18 +1,25 @@
-import * as z from "zod"
-import { CompleteLease, relatedLeaseModel, CompleteMaintenanceJob, relatedMaintenanceJobModel, CompleteUser, relatedUserModel } from "./index"
+import * as z from "zod";
+import {
+	type CompleteLease,
+	type CompleteMaintenanceJob,
+	type CompleteUser,
+	relatedLeaseModel,
+	relatedMaintenanceJobModel,
+	relatedUserModel,
+} from "./index";
 
 export const tenantModel = z.object({
-  id: z.string(),
-  occupation: z.string().nullish(),
-  employer: z.string().nullish(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-})
+	id: z.string(),
+	occupation: z.string().nullish(),
+	employer: z.string().nullish(),
+	createdAt: z.date(),
+	updatedAt: z.date(),
+});
 
 export interface CompleteTenant extends z.infer<typeof tenantModel> {
-  leases: CompleteLease[]
-  maintenanceJobs: CompleteMaintenanceJob[]
-  User: CompleteUser[]
+	leases: CompleteLease[];
+	maintenanceJobs: CompleteMaintenanceJob[];
+	User: CompleteUser[];
 }
 
 /**
@@ -20,8 +27,10 @@ export interface CompleteTenant extends z.infer<typeof tenantModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const relatedTenantModel: z.ZodSchema<CompleteTenant> = z.lazy(() => tenantModel.extend({
-  leases: relatedLeaseModel.array(),
-  maintenanceJobs: relatedMaintenanceJobModel.array(),
-  User: relatedUserModel.array(),
-}))
+export const relatedTenantModel: z.ZodSchema<CompleteTenant> = z.lazy(() =>
+	tenantModel.extend({
+		leases: relatedLeaseModel.array(),
+		maintenanceJobs: relatedMaintenanceJobModel.array(),
+		User: relatedUserModel.array(),
+	}),
+);

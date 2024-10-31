@@ -1,12 +1,9 @@
-import type { bankModel, landlordModel } from "@/prisma/zod";
 import type { z } from "zod";
 import type { signInSchema, signUpSchema, verifyUserSchema } from "./constants";
 
 export type SignIn = z.infer<typeof signInSchema>;
 export type SignUp = z.infer<typeof signUpSchema>;
-export type Landlord = z.infer<typeof landlordModel>;
 export type VerifyUser = z.infer<typeof verifyUserSchema>;
-export type Bank = z.infer<typeof bankModel>;
 
 export interface CreateCustomer {
 	status: boolean;

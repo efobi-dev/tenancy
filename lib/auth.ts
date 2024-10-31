@@ -1,3 +1,4 @@
+import { env } from "@/lib/env";
 import { sha256 } from "@oslojs/crypto/sha2";
 import {
 	encodeBase32LowerCaseNoPadding,
@@ -7,7 +8,6 @@ import type { Session, User } from "@prisma/client";
 import { Google } from "arctic";
 import { cookies } from "next/headers";
 import prisma from "./db";
-import { env } from "@/lib/env";
 
 export const google = new Google(
 	env.GOOGLE_CLIENT_ID,

@@ -1,7 +1,7 @@
-import type { NextRequest } from "next/server";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { env } from "@/lib/env";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import type { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest): Promise<Response> {
 	try {

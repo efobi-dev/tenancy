@@ -1,23 +1,6 @@
 "use client";
 
-import { Form, FormField } from "./ui/form";
-import { useDebounce } from "use-debounce";
-import { useToast } from "@/hooks/use-toast";
-import { useForm } from "react-hook-form";
-import { verifyUserSchema, type VerifyUser, type Bank } from "@/lib/constants";
-import { useTransition, useState } from "react";
-import { Loader } from "lucide-react";
 import { getBank, verifyUser } from "@/actions/user";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "./ui/card";
-import { Input } from "./ui/input";
 import {
 	Select,
 	SelectContent,
@@ -25,7 +8,26 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { verifyUserSchema } from "@/lib/constants";
+import type { VerifyUser } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { Bank } from "@prisma/client";
+import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { useDebounce } from "use-debounce";
 import { Button } from "./ui/button";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "./ui/card";
+import { Form, FormField } from "./ui/form";
+import { Input } from "./ui/input";
 
 export function Verification({
 	first_name,

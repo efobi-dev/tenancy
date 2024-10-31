@@ -1,7 +1,7 @@
-import prisma from "@/lib/db";
 import { createHmac } from "node:crypto";
-import type { VerificationWebhook } from "@/lib/types";
+import prisma from "@/lib/db";
 import { env } from "@/lib/env";
+import type { VerificationWebhook } from "@/lib/types";
 
 export async function POST(req: Request): Promise<Response> {
 	try {
